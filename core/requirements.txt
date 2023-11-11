@@ -1,0 +1,10 @@
+django
+djangorestframework
+markdown       
+django-filter
+python-decouple
+gunicorn
+black
+psycopg2-binary
+Pillow
+djangorestframework-simplejwt

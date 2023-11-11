@@ -1,0 +1,30 @@
+version: '3.9'
+
+
+services:
+  backend:
+    build: './core'
+    container_name: "backend"
+    restart: "always"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - './core:/app'
+
+    environment:
+      - SECRET_KEY='django-insecure-$6ld(_gl^1au5%nf9wni8h1cu%kl555^j+p%l#o(9$^5ou*vh6'
+      - DEBUG=True
+    depends_on:
+      - postgres
+    ports:
+      - 8000:8000
+
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=root_db
