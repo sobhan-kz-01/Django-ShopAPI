@@ -3,8 +3,12 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from .models import Profile
 
+
 @receiver(post_save, sender=User)
-def create_profile_user(sender, **kwargs):
+def create_profile_user(**kwargs):
+    """
+    Create profile instance after user created
+    """
     if kwargs.get("created"):
         user_instance = kwargs.get("instance")
         Profile.objects.create(user=user_instance)
