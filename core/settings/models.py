@@ -29,3 +29,15 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+class SeoAbstract(models.Model):
+    """
+    Abstract model to add seo fields per model inheritance
+    """
+
+    meta_title = models.CharField(verbose_name=_("Meta title"), max_length=400,help_text='Meta Title',null=True,blank=True)
+    meta_keywords = models.TextField(verbose_name=_("Meta keywords"), max_length=600,help_text='Meta Keywords',null=True,blank=True)
+    meta_description = models.TextField(verbose_name=_("Meta description"), max_length=600,help_text='Meta Description',null=True,blank=True)
+
+    class Meta:
+        abstract = True
