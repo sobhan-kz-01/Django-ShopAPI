@@ -11,6 +11,5 @@ class Profile(BaseModel):
 
     def __str__(self) -> str:
         if self.user.email:
-
             return self.user.email
         return self.user.username

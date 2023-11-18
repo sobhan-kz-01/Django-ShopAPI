@@ -13,6 +13,7 @@ class ChangePasswordAPIView(generics.GenericAPIView):
     """
     Change Current Password API
     """
+
     permission_classes = [IsAuthenticated]
     serializer_class = ChangePasswordSerializer
 
