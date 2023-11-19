@@ -15,11 +15,23 @@ services:
       - DEBUG=True
     depends_on:
       - postgres
+      - rabbitmq
     ports:
       - 8000:8000
 
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672" 
+      - "15672:15672" # Web UI port
+
   postgres:
     image: postgres:14-alpine
+    container_name: postgres
     ports:
       - 5432:5432
     volumes:
