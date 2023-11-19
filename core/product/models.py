@@ -84,7 +84,7 @@ class Varient(BaseModel):
     def __str__(self) -> str:
         if self.color_name:
             return self.color_name
-        return self.title.title
+        return self.value
     
     def clean(self) -> None:
         if self.color and not self.title.varient_type == "COLOR":
