@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "user.apps.UserConfig",
     # External Modules
     "rest_framework",
-    'colorfield'
+    "colorfield",
 ]
 
 # REST_FRAMEWORK = {
