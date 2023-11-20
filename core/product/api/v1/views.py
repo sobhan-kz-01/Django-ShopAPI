@@ -14,7 +14,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     def get_serializer_class(self):
         if self.action == "list":
             return ShortProductSerializer
-        elif self.action == "retrive":
+        elif self.action == "retrieve":
             return ProductSerializer
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):

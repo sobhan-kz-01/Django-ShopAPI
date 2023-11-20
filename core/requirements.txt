@@ -9,3 +9,4 @@ psycopg2-binary
 Pillow
 djangorestframework-simplejwt
 django-colorfield
+django-debug-toolbar
