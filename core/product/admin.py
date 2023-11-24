@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Product, Category, ProductInventory, Varient, VarientTitle
-from dynamic_raw_id.admin import DynamicRawIDMixin
 
 
 @admin.register(VarientTitle)

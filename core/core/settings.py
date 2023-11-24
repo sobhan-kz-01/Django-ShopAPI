@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "product.apps.ProductConfig",
     "settings.apps.SettingsConfig",
     "user.apps.UserConfig",
+    "order.apps.OrderConfig",
     # External Modules
     "rest_framework",
     "colorfield",

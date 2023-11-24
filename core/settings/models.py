@@ -7,6 +7,9 @@ from django.db.models import Manager
 
 class BaseModelManager(Manager):
     def all_active_objects(self):
+        """
+        Return active objects -> filter(is_active=True)
+        """
         return super().all().filter(is_active=True)
 
 
@@ -57,6 +60,5 @@ class SeoAbstract(models.Model):
         null=True,
         blank=True,
     )
-
     class Meta:
         abstract = True
