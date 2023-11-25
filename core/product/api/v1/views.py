@@ -1,13 +1,13 @@
 from rest_framework import viewsets
-
-from .permissions import IsAdminOrReadonly
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .serializers import ProductSerializer, CategorySerializer, ShortProductSerializer
 from ...models import Product, Category
 from utils import CustomPagination
 
-
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-    
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.filter(is_active=True)
     pagination_class = CustomPagination
     
@@ -18,6 +18,8 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             return ProductSerializer
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     queryset = Category.objects.filter(is_active=True)
     pagination_class = CustomPagination

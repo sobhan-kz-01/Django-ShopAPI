@@ -44,18 +44,20 @@ INSTALLED_APPS = [
     "settings.apps.SettingsConfig",
     "user.apps.UserConfig",
     "order.apps.OrderConfig",
+    
     # External Modules
     "rest_framework",
+    'rest_framework.authtoken',
     "colorfield",
     "debug_toolbar",
 ]
 
-# REST_FRAMEWORK = {
+REST_FRAMEWORK = {
 
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     )
-# }
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
