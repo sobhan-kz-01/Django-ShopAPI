@@ -92,7 +92,7 @@ class Setting(BaseModel):
     def __str__(self):
         return "Setting"
 
-    def save(self, **kwargs) -> None:
-        if Setting.objects.count() <= 1:
+    def clean(self, **kwargs) -> None:
+        if Setting.objects.count() >= 1:
             raise ValidationError(_("Cant save more than one setting object"))
-        return super().save(Setting, kwargs)
+        return super().clean()
