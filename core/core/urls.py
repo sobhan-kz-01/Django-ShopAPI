@@ -20,13 +20,15 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    path('admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),
+    path("__debug__/", include("debug_toolbar.urls")),  # DEBUG TOOLBAR
     path("admin/", admin.site.urls),
     path("api/v1/product/", include("product.api.v1.urls")),
     path("api/v1/user/", include("user.api.v1.urls")),
     # Authentication
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

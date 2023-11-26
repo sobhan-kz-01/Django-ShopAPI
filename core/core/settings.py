@@ -43,18 +43,19 @@ INSTALLED_APPS = [
     "product.apps.ProductConfig",
     "settings.apps.SettingsConfig",
     "user.apps.UserConfig",
+    "order.apps.OrderConfig",
     # External Modules
     "rest_framework",
-    'dynamic_raw_id',
-    'colorfield'
+    "rest_framework.authtoken",
+    "colorfield",
+    "debug_toolbar",
 ]
 
-# REST_FRAMEWORK = {
-
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     )
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -64,10 +65,18 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
+if DEBUG:
+    import socket  # only if you haven't already imported this
 
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + [
+        "127.0.0.1",
+        "10.0.2.2",
+    ]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -134,8 +143,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR.parent / "static"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR.parent / "media"
 # Default primary key field type
 # https://docs.djangoprojsect.com/en/4.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -22,6 +22,7 @@ services:
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
+    restart: "always"
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
@@ -32,6 +33,7 @@ services:
   postgres:
     image: postgres:14-alpine
     container_name: postgres
+    restart: "always"
     ports:
       - 5432:5432
     volumes:
@@ -40,3 +42,24 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_USER=root
       - POSTGRES_DB=root_db
+  smtp4dev:
+    image: rnwood/smtp4dev:v3
+    restart: always
+    ports:
+      # Change the number before : to the port the web interface should be accessible on
+      - '5000:80'
+      # Change the number before : to the port the SMTP server should be accessible on
+      - '25:25'
+      # Change the number before : to the port the IMAP server should be accessible on
+      - '143:143'
+    volumes:
+      # This is where smtp4dev stores the database..
+        - smtp4dev-data:/smtp4dev
+    environment:
+      
+      - ServerOptions__HostName=smtp4dev
+
+     
+
+volumes:
+  smtp4dev-data:
