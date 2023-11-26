@@ -30,7 +30,6 @@ class Product(BaseModel, SeoAbstract):
     unit_price = models.PositiveBigIntegerField(verbose_name=_("Price"))
     image = models.ImageField(verbose_name=_("Image"), null=True, blank=True)
     description = models.TextField(verbose_name=_("Description"), null=True, blank=True)
-
     is_digital = models.BooleanField(
         verbose_name=_("Is digital product?"), default=False
     )
@@ -50,9 +49,9 @@ class Product(BaseModel, SeoAbstract):
 
     def __str__(self) -> str:
         return self.title
-    
+
     @staticmethod
-    def calculate_discount_price(discount,discount_type,price):
+    def calculate_discount_price(discount, discount_type, price):
         """
         Calculate discount price
         """
@@ -66,11 +65,14 @@ class Product(BaseModel, SeoAbstract):
                 final_price = int(price - discount)
 
         return final_price
-    
+
     @property
     def discount_price(self):
-        return self.calculate_discount_price(self.discount, self.discount_type, self.unit_price)
-    
+        return self.calculate_discount_price(
+            self.discount, self.discount_type, self.unit_price
+        )
+
+
 class VarientTitle(BaseModel):
     """
     Varient title table
@@ -111,7 +113,7 @@ class Varient(BaseModel):
     color_name = models.CharField(
         verbose_name=_("Color name"), max_length=300, null=True, blank=True
     )
-    
+
     def __str__(self) -> str:
         if self.color_name:
             return self.color_name
@@ -147,5 +149,6 @@ class ProductInventory(BaseModel):
 
     @property
     def discount_price(self):
-        return self.product.calculate_discount_price(self.product.discount, self.product.discount_type, self.price)
-    
+        return self.product.calculate_discount_price(
+            self.product.discount, self.product.discount_type, self.price
+        )

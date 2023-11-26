@@ -22,7 +22,7 @@ class UserAddress(BaseModel):
 
     def __str__(self):
         return str(self.user)
-    
+
     class Meta:
         verbose_name_plural = _("User Addresses")
         verbose_name = _("User Address")

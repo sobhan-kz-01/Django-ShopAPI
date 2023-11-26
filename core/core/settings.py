@@ -44,18 +44,16 @@ INSTALLED_APPS = [
     "settings.apps.SettingsConfig",
     "user.apps.UserConfig",
     "order.apps.OrderConfig",
-    
     # External Modules
     "rest_framework",
-    'rest_framework.authtoken',
+    "rest_framework.authtoken",
     "colorfield",
     "debug_toolbar",
 ]
 
 REST_FRAMEWORK = {
-
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
 
@@ -73,8 +71,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = "core.urls"
 if DEBUG:
     import socket  # only if you haven't already imported this
+
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+    INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + [
+        "127.0.0.1",
+        "10.0.2.2",
+    ]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
